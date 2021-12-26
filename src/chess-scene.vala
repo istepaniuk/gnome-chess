@@ -56,7 +56,7 @@ public class ChessModel : Object
     private double update_position (double timestep, double value, double target)
     {
         var distance = Math.fabs (target - value);
-        var step = timestep * 4.0;
+        var step = timestep * 16.0;
 
         if (step > distance)
             step = distance;
