@@ -133,9 +133,9 @@ public class ChessView : Gtk.DrawingArea
 
                 c.rectangle (x, y, square_size, square_size);
                 if ((file + rank) % 2 == 0)
-                    c.set_source_rgb (0xba/255.0, 0xbd/255.0, 0xb6/255.0);
+                    c.set_source_rgb (0x8c/255.0, 0xa2/255.0, 0xbe/255.0);
                 else
-                    c.set_source_rgb (0xee/255.0, 0xee/255.0, 0xec/255.0);
+                    c.set_source_rgb (0xde/255.0, 0xe3/255.0, 0xe6/255.0);
                 c.fill ();
             }
         }
@@ -146,8 +146,8 @@ public class ChessView : Gtk.DrawingArea
              * ranks are centered on individual glyph widths and heights */
 
             c.set_source_rgb (0x88/255.0, 0x8a/255.0, 0x85/255.0);
-            c.set_font_size (border_size * 0.6);
-            c.select_font_face ("sans-serif", Cairo.FontSlant.NORMAL, Cairo.FontWeight.BOLD);
+            c.set_font_size (border_size * 0.4);
+            c.select_font_face ("sans-serif", Cairo.FontSlant.NORMAL, Cairo.FontWeight.NORMAL);
 
             Cairo.TextExtents extents;
             c.text_extents ("abcdefgh", out extents);
@@ -183,12 +183,6 @@ public class ChessView : Gtk.DrawingArea
             {
                 c.text_extents (ranks[i], out extents);
 
-                /* Black file */
-                c.save ();
-                c.move_to (file_offset - extents.width / 2, top);
-                c.show_text (files[i]);
-                c.restore ();
-
                 /* White file */
                 c.save ();
                 c.move_to (file_offset - extents.width / 2, bottom);
@@ -201,12 +195,6 @@ public class ChessView : Gtk.DrawingArea
                 /* Left rank */
                 c.save ();
                 c.move_to (-((double) square_size * 4 + border_size - (border_size - extents.width) / 2), rank_offset + y_offset);
-                c.show_text (ranks[i]);
-                c.restore ();
-
-                /* Right rank */
-                c.save ();
-                c.move_to ((double) square_size * 4 + (border_size - extents.width) / 2, rank_offset + y_offset);
                 c.show_text (ranks[i]);
                 c.restore ();
 
